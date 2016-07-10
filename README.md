@@ -8,12 +8,15 @@ Minimalistic, experimatal RESTfull API framework
 [List of forks] (https://github.com/srdjan/restro/network/members)
 
 To build:
-- clone git repo: 
+- clone git repo:
+
    git clone https://github.com/Srdjan/restro.git
 
 - goto restro folder:
+   
    cd restro
 
 - run:
+
    npm install
    npm test
