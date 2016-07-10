@@ -7,7 +7,7 @@ Minimalistic, experimatal RESTfull API framework
 
 [List of forks] (https://github.com/srdjan/restro/network/members)
 
-To run the example:
+To build:
 - clone git repo: 
    git clone https://github.com/Srdjan/restro.git
 
@@ -16,28 +16,4 @@ To run the example:
 
 - run
     npm install
-    npm buidl
-
-- run build script
-    build // on windows
-    ./build.sh // on linux/OSX
-
-- navigate to ./examples/apple-farm
-
-- run: node app.js
-
-- in the browser, open: localhost:8080/
-- in the 'Explorer' entry field type: /api/apples, and follow the links
-
-JSON format for 'Create':
-    {
-      "weight": 10,
-      "color": "red"
-    }
-
-JSON format for 'Grow':
-    {
-      "weightIncr": 120,
-    }
-
-...
+    npm test
