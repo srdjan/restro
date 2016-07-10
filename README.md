@@ -2,7 +2,8 @@
 
 ![npm downloads](https://img.shields.io/npm/dm/restro.svg)
 
-> Minimalistic, experimatal RESTfull API framework
+> Minimalistic, experimental API framework
+> for building Hypermedia-Driven RESTful Web Services with <b>NodeJs</b>
 
 [Screencast](https://dl.dropboxusercontent.com/u/51491957/rest-api/v.html)
 
