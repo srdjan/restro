@@ -1,22 +1,32 @@
-RESTRO POC (alpha)
-==========================
+# restro (alpha)
 
-Minimalistic, experimatal RESTfull API framework
+![npm downloads](https://img.shields.io/npm/dm/restro.svg)
+
+> Minimalistic, experimatal RESTfull API framework
 
 [Screencast](https://dl.dropboxusercontent.com/u/51491957/rest-api/v.html)
 
 [List of forks] (https://github.com/srdjan/restro/network/members)
 
-To build:
-- clone git repo:
+To build, first clone git repo:
 
-   git clone https://github.com/Srdjan/restro.git
+sh```
+git clone https://github.com/Srdjan/restro.git
+```
 
-- goto restro folder:
+then naviagte to restro folder:
    
-   cd restro
+```sh
+cd restro
+```
 
-- run:
+and run:
 
+```sh
    npm install
    npm test
+```
+
+# License
+
+The MIT License (MIT)
