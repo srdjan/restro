@@ -11,9 +11,9 @@ To build:
 - clone git repo: 
    git clone https://github.com/Srdjan/restro.git
 
-- goto restro folder
-    cd restro
+- goto restro folder:
+   cd restro
 
-- run
-    npm install
-    npm test
+- run:
+   npm install
+   npm test
