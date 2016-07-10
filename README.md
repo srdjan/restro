@@ -10,7 +10,7 @@
 
 To build, first clone git repo:
 
-sh```
+```sh
 git clone https://github.com/Srdjan/restro.git
 ```
 
