@@ -1,6 +1,6 @@
 {
   "name": "restro",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Framework for experimenting with Hypemedia driven APIs ",
   "main": "index.js",
   "repository": {
