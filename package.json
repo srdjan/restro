@@ -1,0 +1,33 @@
+{
+  "name": "restro",
+  "version": "1.0.0",
+  "description": "Framework for experimenting with Hypemedia driven APIs ",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/https://github.com/Srdjan/restro.git"
+  },
+  "author": {
+    "name": "@djidja8",
+    "email": "srdjan@timok.com",
+    "url": "https://github.com/Srdjan"
+  },
+  "dependencies": {
+    "data.either": "^1.4.0",
+    "halson": "^2.3.1",
+    "node-persist": "^0.0.11",
+    "ramda": "^0.21.0",
+    "tcomb": "^3.2.5",
+    "urlsafe-base64": "^1.0.0"
+  },
+  "devDependencies": {
+    "expect.js": "^0.3.1"
+  },
+  "scripts": {
+    "test": "node ./tests/end2end.js",
+    "build": "node index.js",
+    "minor-release": "npm version minor && npm publish && git push --follow-tags",
+    "major-release": "npm version major && npm publish && git push --follow-tags"
+  },
+  "license": "MIT"
+}
