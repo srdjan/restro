@@ -1,4 +1,4 @@
-# restro (alpha)
+# Restro (alpha)
 
 ![npm downloads](https://img.shields.io/npm/dm/restro.svg)
 
