@@ -4,10 +4,10 @@
 
 > Minimalistic, experimental API framework
 > for building Hypermedia-Driven RESTful Web Services with <b>NodeJs</b>
+> You can see examples here: https://github.com/Srdjan/restro.examples
 
 [Screencast](https://dl.dropboxusercontent.com/u/51491957/rest-api/v.html)
 
-[List of forks] (https://github.com/srdjan/restro/network/members)
 
 =========================================
 To build, first clone git repo:
