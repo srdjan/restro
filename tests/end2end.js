@@ -1,18 +1,19 @@
 "use strict"
 
-const expect   = require('expect.js')
-const fn       = require('../core').fn
-const db       = require('../core').db
+const expect = require('expect.js')
+const fn = require('../core').fn
+const db = require('../core').db
 const Pipeline = require('../server').pipeline
-const authn    = require('../middleware').authn
-const authr    = require('../middleware').authr
+const authn = require('../middleware').authn
+const authr = require('../middleware').authr
 const resolver = require('../middleware').resolver
-const invoker  = require('../middleware').invoker
-const hal      = require('../middleware').hal
-const Apple    = require('./apple')
-const server   = require('./http-mock')
-const log      = console.log
+const invoker = require('../middleware').invoker
+const hal = require('../middleware').hal
+const Apple = require('./apple')
+const server = require('./http-mock')
+const log = console.log
 
+db.init('./datastore')
 db.clear()
 
 log('------ configure pipeline --------')

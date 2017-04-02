@@ -4,8 +4,8 @@
 "use strict"
 
 let datastore = require('node-persist')
-const fn      = require('./fn')
-const log     = console.log
+const fn = require('./fn')
+const log = console.log
 
 function init(path) {
     datastore.initSync({

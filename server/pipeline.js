@@ -4,12 +4,8 @@
 "use strict"
 
 const urlParser = require('url')
-const fn        = require('../core').fn
-const db        = require('../core').db
-const log       = console.log
-
-db.init('../../../datastore')
-db.clear()
+const fn = require('../core').fn
+const log = console.log
 
 function getId(tokens) {
   let id = fn.btoa(tokens[tokens.length - 1])

@@ -3,9 +3,9 @@
 //---------------------------------------------------------------------------------
 "use strict"
 
-const fn        = require('../core').fn
+const fn = require('../core').fn
 const resource  = require('./resource')
-const log       = console.log
+const log = console.log
 
 exports.func = function(ctx) {
   let handler = resource[ctx.method]
