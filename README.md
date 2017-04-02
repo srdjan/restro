@@ -9,7 +9,6 @@
 [Screencast](https://dl.dropboxusercontent.com/u/51491957/rest-api/v.html)
 
 
-=========================================
 To build, first clone git repo:
 
 ```sh
