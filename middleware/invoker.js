@@ -1,13 +1,6 @@
-// ---------------------------------------------------------------------------------
-// - method invoker
-// ---------------------------------------------------------------------------------
-'use strict'
+import resource from './resource'
 
-const fn = require('../core').fn
-const resource = require('./resource')
-const log = console.log
-
-exports.func = function (ctx) {
+function func(ctx) {
   let handler = resource[ctx.method]
   if (!typeof handler) {
     ctx.result = { Error: 'method resolver error' }
@@ -18,9 +11,12 @@ exports.func = function (ctx) {
   return ctx
 }
 
+export default func
+
 // ---------------------------------------------------------------------------------
 // @tests
 // ---------------------------------------------------------------------------------
+const log = console.log
 let expect = require('expect.js')
 log('testing: invoker.js')
 

@@ -1,12 +1,6 @@
-// ---------------------------------------------------------------------------------
-// - resource
-// ---------------------------------------------------------------------------------
-'use strict'
-
-const Either = require('data.either')
-const fn = require('../core').fn
-const db = require('../core').db
-const log = console.log
+import Either from 'data.either'
+import fn from '../core'
+import db from '../core'
 
 function validateApiCall (ctx) {
   if (ctx.hal) {
@@ -77,7 +71,7 @@ function processApi (ctx) {
   if (ctx.entity[ctx.rel](ctx.body)) {
     return Either.Right(ctx)
   }
-  log('domain API returned false - no changes to entity should persist')
+  fn.log('domain API returned false - no changes to entity should persist')
   return Either.Left(ctx)
 }
 
@@ -89,7 +83,7 @@ function getAll (ctx) {
   return ctx
 }
 
-exports.get = function (ctx) {
+function get(ctx) {
   if (ctx.id) {
     let entity = db.get(ctx.id)
     if (typeof entity === 'undefined') {
@@ -103,8 +97,7 @@ exports.get = function (ctx) {
   }
   return ctx
 }
-
-exports.post = function (ctx) {
+function post(ctx) {
   if (ctx.id) {
     ctx.entity = db.get(ctx.id)
     return validateApiCall(ctx).chain(processApi).chain(persist).merge()
@@ -113,7 +106,7 @@ exports.post = function (ctx) {
   return validatePropsMatch(ctx).chain(update).chain(persist).merge()
 }
 
-exports.put = function (ctx) {
+function put(ctx) {
   ctx.entity = db.get(ctx.id)
   return validatePropsMatch(ctx)
     .chain(validateApiCall)
@@ -123,7 +116,7 @@ exports.put = function (ctx) {
     .merge()
 }
 
-exports.patch = function (ctx) {
+function patch(ctx) {
   ctx.entity = db.get(ctx.id)
   return validatePropsExist(ctx)
     .chain(validateApiCall)
@@ -133,7 +126,15 @@ exports.patch = function (ctx) {
     .merge()
 }
 
-exports.delete = function (ctx) {
+function del(ctx) {
   ctx.entity = db.get(ctx.id)
   return validateApiCall(ctx).chain(processApi).chain(persist).merge()
+}
+
+export default {
+  get,
+  post,
+  put,
+  patch,
+  del
 }

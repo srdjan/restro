@@ -1,12 +1,6 @@
-// ---------------------------------------------------------------------------------
-// - type resolver
-// ---------------------------------------------------------------------------------
-'use strict'
+import fn from '../core'
 
-const fn = require('../core').fn
-const log = console.log
-
-module.exports = function (model) {
+function resolver(model) {
   return {
     func: function (ctx) {
       let tokens = fn.getTokens(ctx.url)
@@ -32,3 +26,5 @@ module.exports = function (model) {
     }
   }
 }
+
+export default resolver

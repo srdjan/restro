@@ -1,13 +1,6 @@
-// ---------------------------------------------------------------------------------
-// - hal parsing
-// ---------------------------------------------------------------------------------
-'use strict'
+const hal = require('halson')
+import fn from './fn'
 
-const halson = require('halson')
-const fn = require('../core').fn
-const log = console.log
-
-// --------
 function isFunc (obj) {
   return obj instanceof Function
 }
@@ -139,7 +132,7 @@ function createResource (ctx) {
   return halRep
 }
 
-exports.func = function (ctx) {
+function func(ctx) {
   if (ctx.hal) {
     if (ctx.result instanceof Array) {
       ctx.result = createList(ctx)
@@ -150,11 +143,12 @@ exports.func = function (ctx) {
   return ctx
 }
 
+export default func
 // ---------------------------------------------------------------------------------
 // @tests
 // ---------------------------------------------------------------------------------
 const expect = require('expect.js')
-log('testing: hal.js')
+fn.log('testing: hal.js')
 
 // TEST EMBEDS
 // -------------------------------------------------------------------------------
@@ -260,7 +254,7 @@ let ctx = {
   result: apples[0]
 }
 let res = exports.func(ctx)
-// log(JSON.stringify(res.result))
+// fn.log(JSON.stringify(res.result))
 expect(res.result.listLinkRels().length).to.be(3)
 let embeds = res.result.getEmbeds('refObj1')
 expect(embeds.length).to.be(1)
@@ -273,7 +267,7 @@ ctx = {
   result: apples
 }
 res = exports.func(ctx)
-// log(JSON.stringify(res.result))
+// fn.log(JSON.stringify(res.result))
 embeds = res.result.getEmbeds('apples')
 expect(embeds.length).to.be(2)
 
@@ -361,6 +355,6 @@ expect(embeds.length).to.be(2)
 //   result: todos
 // }
 // let res = exports.func(ctx)
-// log(JSON.stringify(res.result))
+// fn.log(JSON.stringify(res.result))
 // let embeds = res.result.getEmbeds('todos')
 // expect(embeds.length).to.be(12)
