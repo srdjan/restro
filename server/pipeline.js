@@ -5,6 +5,7 @@
 
 const urlParser = require('url')
 const fn = require('../core').fn
+let handlers = []
 const log = console.log
 
 function getId(tokens) {
@@ -35,29 +36,17 @@ function getIdAndRel(url) {
   return idAndRel
 }
 
-let handlers = []
-exports.use = function(f, t) {
-  handlers.push({ func: f, trace: t || false})
-  return this
-}
-
-let appModel
-exports.expose = function(model) {
-  appModel = model
-  return this
-}
-
-function extractIdAndRel(ctx, request) {
+function extractIdAndRel(request, ctx) {
   let idAndRel = getIdAndRel(request.url)
   ctx.id = idAndRel.id
   ctx.rel = idAndRel.rel
   return ctx
 }
 
-exports.process = function(request, ctx) {
+function process(request, ctx) {
   if(request.headers['accept'].indexOf('application/hal+json') > -1) {
     ctx.hal = true
-    ctx = extractIdAndRel(ctx, request)
+    ctx = extractIdAndRel(request, ctx)
   }
 
   ctx.method = request.method.toLowerCase()
@@ -69,9 +58,20 @@ exports.process = function(request, ctx) {
   if( urlParts.query && urlParts.query.hasOwnProperty && urlParts.query.hasOwnProperty('page')) {
     ctx.pageNumber = urlParts.query.page
   }
-  ctx.model = appModel
   ctx = fn.runAll(handlers, d => d.statusCode !== 200, ctx)
   return ctx
+}
+
+function use(f, t) {
+  handlers.push({ func: f, trace: t || false})
+  return this
+}
+
+module.exports = function() {
+  return {
+    process,
+    use
+  }
 }
 
 //---------------------------------------------------------------------------------

@@ -1,5 +1,4 @@
-
 module.exports = {
-    db: require('./db'),
-    fn: require('./fn')
+  db: require('./db'),
+  fn: require('./fn')
 }

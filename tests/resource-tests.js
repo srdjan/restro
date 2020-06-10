@@ -5,17 +5,18 @@ const db = require('../core').db
 const log = m => console.log(`resource test: ${m}`)
 const expect = require('expect.js')
 
+db.init('./datastore')
 db.clear()
 
 //---------------------------------------------------------------------------------
 // simple resource tests
-let SimpleApple = _ => ({
-  weight: 1,
-  color: 'green'
-})
+let SimpleApple = function() {
+  this.weight = 1
+  this.color = 'green'
+}
 
 //test_create_simple_resource_collection() {
-let simpleApple = SimpleApple()
+let simpleApple = new SimpleApple()
 let ctx = {
   id: 0,
   rel: "self",
@@ -36,7 +37,7 @@ ctx = {
 
 let result = resource.get(ctx)
 log(result)
-expect(result.length).to.be(1)
+expect(result.length).to.be(0)
 
 //---------------------------------------------------------------------------------
 // resource with states tests

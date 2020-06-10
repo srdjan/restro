@@ -9,14 +9,14 @@ const log = console.log
 
 function init(path) {
     datastore.initSync({
-    dir: path,
-    stringify: JSON.stringify,
-    parse: JSON.parse,
-    encoding: 'utf8',
-    logging: false, // can also be custom logging function
-    continuous: true,
-    interval: false
-  })
+      dir: path,
+      stringify: JSON.stringify,
+      parse: JSON.parse,
+      encoding: 'utf8',
+      logging: false, // can also be custom logging function
+      continuous: true,
+      interval: false
+    })
 }
 
 let milis = 0
@@ -92,14 +92,10 @@ module.exports = {
 //---------------------------------------------------------------------------------
 //@tests
 //---------------------------------------------------------------------------------
-  let expect = require('expect.js')
+//  let expect = require('expect.js')
 
-//   //todo: remove HAL dependancy from the tests here in ./lib/core
-//   let hal = require('./hal.js')  
-//   log('testing: db.js')
-
-  init('./datastore-test')
-  clear()
+//  init('./datastore-test')
+//  clear()
 
 //   //-- TEST PAGING
 //   //TEST ZERO records
@@ -141,9 +137,9 @@ module.exports = {
 //   expect(fn.contains('self', res.result.listLinkRels())).to.be(true)
 //   expect(fn.contains('create', res.result.listLinkRels())).to.be(true)
 
+//   todos.push({
 // //TEST PAGE SIZE records
 //   todos = []
-//   todos.push({
 //               content: '2',
 //               isDone: false,
 //               isArchived: false
@@ -237,5 +233,5 @@ module.exports = {
 
 //   let next = res.result.getLink('next')
 //   // log(next)
-// //-- clear database after tests
-clear()
+//  //-- clear database after tests
+//  clear()

@@ -1,154 +1,139 @@
-//---------------------------------------------------------------------------------
-//- resource
-//---------------------------------------------------------------------------------
-"use strict"
+// ---------------------------------------------------------------------------------
+// - resource
+// ---------------------------------------------------------------------------------
+'use strict'
 
 const Either = require('data.either')
 const fn = require('../core').fn
 const db = require('../core').db
 const log = console.log
 
-function validateApiCall(ctx) {
-  if(ctx.hal) {
+function validateApiCall (ctx) {
+  if (ctx.hal) {
     let links = ctx.entity.getLinks()
     if (fn.none(link => link.rel === ctx.rel, links)) {
       ctx.statusCode = 405
-      ctx.result = { Error: 'Conflict - Method call not allowed'}
+      ctx.result = { Error: 'Conflict - Method call not allowed' }
       return Either.Left(ctx)
     }
   }
   return Either.Right(ctx)
 }
 
-function validatePropsExist(ctx) {
+function validatePropsExist (ctx) {
   if (fn.propsDontExist(ctx.body, ctx.entity)) {
     ctx.statusCode = 400
-    ctx.result = { Error: 'Bad Request - props do not exist'}
+    ctx.result = { Error: 'Bad Request - props do not exist' }
     return Either.Left(ctx)
   }
   return Either.Right(ctx)
 }
 
-function validatePropsMatch(ctx) {
+function validatePropsMatch (ctx) {
   if (fn.propsDontMatch(ctx.body, ctx.entity)) {
     ctx.statusCode = 400
-    ctx.result = { Error: 'Bad Request - props do not match'}
+    ctx.result = { Error: 'Bad Request - props do not match' }
     return Either.Left(ctx)
   }
   return Either.Right(ctx)
 }
 
-function update(ctx) {
-  fn.map(key => ctx.entity[key] = ctx.body[key], Object.keys(ctx.body))
+function update (ctx) {
+  fn.map(key => (ctx.entity[key] = ctx.body[key]), Object.keys(ctx.body))
   return Either.Right(ctx)
 }
 
-function persist(ctx) {
+function persist (ctx) {
   if (ctx.method === 'put' || ctx.method === 'patch') {
     ctx.result = db.save(ctx.entity)
-  }
-  else if (ctx.method === 'delete') {
+  } else if (ctx.method === 'delete') {
     let result = db.remove(ctx.id)
     if (result) {
       ctx = getAll(ctx)
-    }
-    else {
+    } else {
       ctx.statusCode = 500
-      ctx.result = { Error:' not able to Delete'}
+      ctx.result = { Error: ' not able to Delete' }
     }
-  }
-  else if (ctx.method === 'post') {
+  } else if (ctx.method === 'post') {
     // if (ctx.id) {
     //   ctx.result = db.save(ctx.entity)
     // }
     // else {
-      ctx.result = db.add(ctx.entity)
+    ctx.result = db.add(ctx.entity)
     // }
-  }
-  else {
+  } else {
     ctx.statusCode = 405
-    ctx.result = { Error: 'Method Not Allowed'}
+    ctx.result = { Error: 'Method Not Allowed' }
     return Either.Left(ctx)
   }
   return Either.Right(ctx)
 }
 
-function processApi(ctx) {
-  if(! ctx.hal) {
+function processApi (ctx) {
+  if (!ctx.hal) {
     return Either.Right(ctx)
   }
 
-  if(ctx.entity[ctx.rel](ctx.body)) {
+  if (ctx.entity[ctx.rel](ctx.body)) {
     return Either.Right(ctx)
   }
   log('domain API returned false - no changes to entity should persist')
   return Either.Left(ctx)
 }
 
-function getAll(ctx) {
-    let all = db.getAll(ctx.pageNumber)
-    ctx.result = all.page
-    ctx.pageNumber = all.pageNumber
-    ctx.pageCount = all.pageCount
-    return ctx
+function getAll (ctx) {
+  let all = db.getAll(ctx.pageNumber)
+  ctx.result = all.page
+  ctx.pageNumber = all.pageNumber
+  ctx.pageCount = all.pageCount
+  return ctx
 }
 
-exports.get = function(ctx) {
+exports.get = function (ctx) {
   if (ctx.id) {
     let entity = db.get(ctx.id)
     if (typeof entity === 'undefined') {
       ctx.statusCode = 404
       ctx.message = 'Not Found'
-    }
-    else {
+    } else {
       ctx.result = entity
     }
-  }
-  else {
+  } else {
     ctx = getAll(ctx)
   }
   return ctx
 }
 
-exports.post = function(ctx) {
-  if(ctx.id) {
+exports.post = function (ctx) {
+  if (ctx.id) {
     ctx.entity = db.get(ctx.id)
-    return validateApiCall(ctx)
-                    .chain(processApi)
-                    .chain(persist)
-                    .merge()
+    return validateApiCall(ctx).chain(processApi).chain(persist).merge()
   }
-  ctx.entity =  new ctx.typeCtor()
-  return validatePropsMatch(ctx)
-                .chain(update)
-                .chain(persist)
-                .merge()
+  ctx.entity = new ctx.typeCtor()
+  return validatePropsMatch(ctx).chain(update).chain(persist).merge()
 }
 
-exports.put = function(ctx) {
+exports.put = function (ctx) {
   ctx.entity = db.get(ctx.id)
   return validatePropsMatch(ctx)
-                  .chain(validateApiCall)
-                  .chain(processApi)
-                  .chain(update)
-                  .chain(persist)
-                  .merge()
+    .chain(validateApiCall)
+    .chain(processApi)
+    .chain(update)
+    .chain(persist)
+    .merge()
 }
 
-exports.patch = function(ctx) {
+exports.patch = function (ctx) {
   ctx.entity = db.get(ctx.id)
   return validatePropsExist(ctx)
-                  .chain(validateApiCall)
-                  .chain(processApi)
-                  .chain(update)
-                  .chain(persist)
-                  .merge()
+    .chain(validateApiCall)
+    .chain(processApi)
+    .chain(update)
+    .chain(persist)
+    .merge()
 }
 
-exports.delete = function(ctx) {
+exports.delete = function (ctx) {
   ctx.entity = db.get(ctx.id)
-  return validateApiCall(ctx)
-                  .chain(processApi)
-                  .chain(persist)
-                  .merge()
+  return validateApiCall(ctx).chain(processApi).chain(persist).merge()
 }
