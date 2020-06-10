@@ -1,6 +1,6 @@
 {
   "name": "restro",
-  "version": "1.2.0",
+  "version": "2.0.0-canary-1",
   "description": "Framework for experimenting with Hypemedia driven APIs ",
   "main": "index.js",
   "repository": {
@@ -13,15 +13,16 @@
     "url": "https://github.com/Srdjan"
   },
   "dependencies": {
-    "data.either": "^1.x.x",
-    "halson": "^2.3.1",
-    "node-persist": "^2.x.x",
-    "ramda": "^0.x.x",
-    "tcomb": "^3.x.x",
-    "urlsafe-base64": "^1.0.0"
+    "data.either": "1.5.2",
+    "halson": "3.0.0",
+    "node-persist": "3.1.0",
+    "purify-ts": "0.15.1",
+    "ramda": "0.27.x",
+    "tcomb": "3.2.29",
+    "urlsafe-base64": "1.0.0"
   },
   "devDependencies": {
-    "expect.js": "^0.3.1"
+    "expect.js": "0.3.1"
   },
   "scripts": {
     "test": "node ./tests/end2end.js",
