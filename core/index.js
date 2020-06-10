@@ -1,4 +1,8 @@
-module.exports = {
-  db: require('./db'),
-  fn: require('./fn')
+import db from './db'
+import fn from './fn'
+
+
+export default {
+  db,
+  fn
 }

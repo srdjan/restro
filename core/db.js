@@ -1,11 +1,4 @@
-//---------------------------------------------------------------------------------
-//- db api
-//---------------------------------------------------------------------------------
-"use strict"
-
-let datastore = require('node-persist')
-const fn = require('./fn')
-const log = console.log
+import datastore from 'node-persist'
 
 function init(path) {
     datastore.initSync({
