@@ -1,11 +1,5 @@
-//---------------------------------------------------------------------------------
-//- authn
-//---------------------------------------------------------------------------------
-"use strict"
+import Either from 'data.either'
 
-const Either = require('data.either')
-const log = console.log
+const func = ctx => Either(ctx)
 
-exports.func = function(ctx) {
-  return ctx
-}
+export default func
