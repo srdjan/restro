@@ -1,3 +1,4 @@
+const expect = require('expect.js')
 import URLSafeBase64 from 'urlsafe-base64'
 import Either from 'data.either'
 import {compose, contains, filter, none, every, difference, map, chain} from 'ramda'

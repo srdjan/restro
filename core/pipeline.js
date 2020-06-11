@@ -1,12 +1,7 @@
-//---------------------------------------------------------------------------------
-//- pipeline
-//---------------------------------------------------------------------------------
-"use strict"
+import urlParser from 'url'
+import fn from './fn'
 
-const urlParser = require('url')
-const fn = require('../core').fn
 let handlers = []
-const log = console.log
 
 function getId(tokens) {
   let id = fn.btoa(tokens[tokens.length - 1])
@@ -78,7 +73,7 @@ module.exports = function() {
 //@tests
 //---------------------------------------------------------------------------------
   let expect = require('expect.js')
-  log('testing: pipeline.js')
+  fn.log('testing: pipeline.js')
 
   //test: getTokens(url):- api/apples/
   let url = '/api/apples/'

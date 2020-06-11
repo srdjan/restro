@@ -1,4 +1,4 @@
-import fn from '../core'
+import fn from './fn'
 
 function resolver(model) {
   return {

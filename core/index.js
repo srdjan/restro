@@ -1,8 +1,7 @@
-import db from './db'
 import fn from './fn'
-
+import resource from './resource'
 
 export default {
-  db,
-  fn
+  fn, 
+  resource
 }

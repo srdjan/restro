@@ -1,6 +1,6 @@
 import Either from 'data.either'
-import fn from '../core'
-import db from '../core'
+import fn from './fn'
+import db from './db'
 
 function validateApiCall (ctx) {
   if (ctx.hal) {

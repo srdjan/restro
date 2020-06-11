@@ -1,12 +1,6 @@
-// ---------------------------------------------------------------------------------
-// - http-server
-// ---------------------------------------------------------------------------------
-'use strict'
-
-const http = require('http')
-const fileHelper = require('./fileHelper')
-const fn = require('../core').fn
-const log = console.log
+import http from 'http'
+import fileHelper from './fileHelper'
+import fn from '../core/fn'
 
 function writeToResp (response, ctx) {
   let contentType = ctx.hal
@@ -60,12 +54,12 @@ exports.createEndPoint = function (pipeline) {
     start (port) {
       server.port = port
       server.listen(server.port)
-      log('API running at port: ' + port + '\nCTRL + SHIFT + C to shutdown')
+      fn.log('API running at port: ' + port + '\nCTRL + SHIFT + C to shutdown')
       return this
     },
     stop () {
       server.stop()
-      log('API at port: ' + server.port + 'stopping...')
+      fn.log('API at port: ' + server.port + 'stopping...')
       return this
     }
   }

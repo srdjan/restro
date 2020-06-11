@@ -1,7 +1,5 @@
 
 module.exports = {
     authn: require('./authn'),
-    authr: require('./authr'),
-    resolver: require('./resolver'),
-    invoker: require('./invoker')
+    authr: require('./authr')
 }
